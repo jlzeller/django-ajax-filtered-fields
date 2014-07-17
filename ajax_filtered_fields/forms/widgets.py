@@ -63,7 +63,7 @@ class FilteredSelectMultiple(forms.SelectMultiple):
                 });
             </script>
         """ % (lookups_output, parent_output, name, 
-            verbose_name, settings.ADMIN_MEDIA_PREFIX)
+            verbose_name, settings.STATIC_URL)
         
         return mark_safe(output)
         
@@ -126,7 +126,7 @@ class FilteredSelect(forms.Select):
             "name": name,
             "element_id": self._element_id, 
             "value": "" if value is None else value,
-            "admin_media_prefix": settings.ADMIN_MEDIA_PREFIX,
+            "admin_media_prefix": settings.STATIC_URL,
             }
                             
         output = u"""
