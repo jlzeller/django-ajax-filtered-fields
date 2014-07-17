@@ -1,4 +1,4 @@
-from django.conf.urls.defaults import *
+from django.conf.urls import patterns, url, include
 
 from ajax_filtered_fields import settings
 from ajax_filtered_fields.views import json_index
