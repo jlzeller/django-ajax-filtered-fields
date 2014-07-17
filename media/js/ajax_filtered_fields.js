@@ -1,3 +1,12 @@
+$(function() {
+  $(".ajax_filter_choice").click(function() {
+    $(this).parent().siblings().css("font-weight", "normal");
+    $(this).parent().css("font-weight","bold");
+    
+  })
+});
+
+
 ajax_filtered_fields = {
     
     request_url: "/ajax_filtered_fields/json_index/",
@@ -52,6 +61,7 @@ ajax_filtered_fields = {
     getForeignKeyJSON: function(element_id, app_label, object_name, 
         lookup_string, select_related) {
         // manage the ForeignKey ajax request
+
         var selector = $("#" + element_id);
         var hidden = $("#hidden-" + element_id);
 

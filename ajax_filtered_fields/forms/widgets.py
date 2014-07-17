@@ -20,9 +20,9 @@ def _renderFilter(js_method_name, element_id, model, lookup_list,
         utils.lookupToString(lookup_dict),
         select_related)
     return u"""
-        <a class="ajax_filter_choice" 
+        <li><a class="ajax_filter_choice" 
             href="javascript:void(0)"
-            onclick="%s">%s</a>
+            onclick="%s">%s</a></li>
     """ % (script, label)
 
 
@@ -86,15 +86,21 @@ class FilteredSelect(forms.Select):
         self._element_id = attrs['id']
         # choices links
         # if there is only one choice, then nothing will be rendered
+        output = []        
         lookups_output = ""
         lookups = utils.getLookups(self.lookups)
+
         if len(lookups) > 1:
-            js_method_name = "getForeignKeyJSON"
+            js_method_name = "getForeignKeyJSON"           
             lookups_output = "\n".join(
                 _renderFilter(js_method_name, self._element_id, 
                     self.model, i, self.select_related) 
                 for i in lookups)      
-                
+        for i in lookups:
+            item = _renderFilter(js_method_name, self._element_id, 
+                    self.model, i, self.select_related)
+            output.append(item)        
+                 
         # get the selected object name
         selection = "-" * 9
         if value:
@@ -130,15 +136,15 @@ class FilteredSelect(forms.Select):
             }
                             
         output = u"""
-            <div class="selector">
-                %(lookups_output)s
+            <div class="selector" style="float:none">
+                <ul>%(lookups_output)s</ul>
             </div>
             
             <div class="selector">
-                <div class="selector-available">
-                    <h2>%(selection)s</h2>
+                <div class="selector-available">                 
+                    <h2 style='font-weight:100'>Currently Selected: <strong>%(selection)s</strong></h2>
                     <p class="selector-filter">
-                        <img src="admin/static/admin/img/selector-search.gif"> 
+                        <img src="/static/admin/img/selector-search.gif"> 
                         <input id="%(filter_id)s" type="text">
                     </p>
                     %(parent_output)s
@@ -162,7 +168,6 @@ class FilteredSelect(forms.Select):
                     ajax_filtered_fields.bindForeignKeyOptions("%(element_id)s");
         		});
         	</script>
-            """ % mapping
-            
+            """ % mapping   
         return mark_safe(output)
         
