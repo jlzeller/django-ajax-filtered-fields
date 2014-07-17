@@ -93,7 +93,7 @@ class FilteredSelect(forms.Select):
             lookups_output = "\n".join(
                 _renderFilter(js_method_name, self._element_id, 
                     self.model, i, self.select_related) 
-                for i in lookups)
+                for i in lookups)      
                 
         # get the selected object name
         selection = "-" * 9
@@ -138,7 +138,7 @@ class FilteredSelect(forms.Select):
                 <div class="selector-available">
                     <h2>%(selection)s</h2>
                     <p class="selector-filter">
-                        <img src="%(admin_media_prefix)simg/admin/selector-search.gif"> 
+                        <img src="admin/static/admin/img/selector-search.gif"> 
                         <input id="%(filter_id)s" type="text">
                     </p>
                     %(parent_output)s
