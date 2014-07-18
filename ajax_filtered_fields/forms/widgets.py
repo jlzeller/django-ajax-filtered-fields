@@ -54,7 +54,7 @@ class FilteredSelectMultiple(forms.SelectMultiple):
         
         output = u"""
             <div>
-                %s
+                <ul>%s</ul>
             </div>
             %s
             <script type="text/javascript">
