@@ -51,7 +51,8 @@ class FilteredSelectMultiple(forms.SelectMultiple):
         # this assumes that /admin/jsi18n/, core.js, SelectBox.js and
         # SelectFilter2.js are loaded from the page
         verbose_name = self.model._meta.verbose_name_plural.replace('"', '\\"')
-        
+        ADMIN_URL = settings.STATIC_URL + "admin/"        
+
         output = u"""
             <div>
                 <ul>%s</ul>
@@ -63,7 +64,7 @@ class FilteredSelectMultiple(forms.SelectMultiple):
                 });
             </script>
         """ % (lookups_output, parent_output, name, 
-            verbose_name, settings.STATIC_URL)
+            verbose_name, ADMIN_URL)
         
         return mark_safe(output)
         
