@@ -132,7 +132,7 @@ class FilteredSelect(forms.Select):
             "name": name,
             "element_id": self._element_id, 
             "value": "" if value is None else value,
-            "admin_media_prefix": settings.STATIC_URL,
+            "static_url": settings.STATIC_URL,
             }
                             
         output = u"""
@@ -144,7 +144,7 @@ class FilteredSelect(forms.Select):
                 <div class="selector-available">                 
                     <h2 style='font-weight:100'>Currently Selected: <strong>%(selection)s</strong></h2>
                     <p class="selector-filter">
-                        <img src="/static/admin/img/selector-search.gif"> 
+                        <img src="%(static_url)sadmin/img/selector-search.gif"> 
                         <input id="%(filter_id)s" type="text">
                     </p>
                     %(parent_output)s
